@@ -1,4 +1,4 @@
 [build]
   command = "flutter build web"
   publish = "build/web"
-  environment = { GO_VERSION = "1.16" }
+  environment = { GOPATH = "/opt/buildhome/go", GOCACHE = "/opt/buildhome/.cache/go-build" }
