@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/pages/task_list_pages.dart';
 import '../models/task_manager.dart';
 
+// login page
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
