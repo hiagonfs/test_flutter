@@ -1,16 +1,56 @@
-# task_manager
+# Gerenciador de Tarefas
 
-A new Flutter project.
+Esse é um projeto de um gerenciador de tarefas desenvolvido em Flutter. Com ele, é possível criar tarefas, definir status e acompanhar o progresso das mesmas.
 
-## Getting Started
+## Estrutura do Projeto
+O projeto do gerenciador de tarefas foi desenvolvido utilizando o framework Flutter, que utiliza a linguagem de programação Dart. A estrutura do projeto segue as seguintes convenções:
 
-This project is a starting point for a Flutter application.
+```
+lib/: diretório principal do projeto, onde se encontram todos os arquivos do código-fonte;
+lib/pages/: diretório onde estão localizadas as telas da aplicação, divididas em arquivos separados;
+lib/models/: diretório onde se encontram as classes de modelo da aplicação, responsáveis por representar as informações manipuladas pela aplicação.
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Instalação
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Para instalar o gerenciador de tarefas, você deve seguir os seguintes passos:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Faça o download do código-fonte do projeto a partir do GitHub:
+
+```
+git clone https://github.com/SENAI-SD/qa-jr-00723-2023-085.248.994-33.git
+```
+
+2. Acesse a pasta do projeto
+
+3. Instale as dependências do projeto:
+
+```
+flutter pub get
+```
+
+## Execução
+
+Para executar o gerenciador de tarefas, você deve seguir os seguintes passos:
+
+1. Execute o seguinte comando para iniciar o aplicativo:
+```
+flutter run
+```
+
+## Dependências
+
+O gerenciador de tarefas possui as seguintes dependências:
+
+- Flutter 2.2.3 ou superior
+- Dart 2.13.4 ou superior
+
+## O que não foi implementado?
+
+- Banco de Dados 
+- Edição de tarefas
+- Marcação laranja da tarefa do responsável 
+- Validação de login (quaisquer campos preenchidos em user e senha são aceitáveis)
+
+## Licença
+Este projeto está licenciado sob a licença MIT - consulte o arquivo LICENSE para obter mais detalhes.
