@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/pages/task_list_pages.dart';
 
+import '../models/task_manager.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -10,6 +12,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
+
+  TaskManager _taskManager = TaskManager();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   // Implementar a lógica de autenticação aqui
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TaskListPage()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            TaskListPage(tasks: _taskManager.getTasks())),
                   );
                 }
               },
