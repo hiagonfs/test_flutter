@@ -5,18 +5,21 @@ import 'package:task_manager/pages/task_detail_page.dart';
 
 class TaskListPage extends StatefulWidget {
   final List<Task> tasks;
+  final String user;
 
-  TaskListPage({required this.tasks});
+  TaskListPage({required this.tasks, required this.user});
 
   @override
   _TaskListPageState createState() => _TaskListPageState();
 }
 
 class _TaskListPageState extends State<TaskListPage> {
+  List<DataRow> _rows = [];
+
   void _navigateToTaskFormPage() async {
     final newTask = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TaskFormPage()),
+      MaterialPageRoute(builder: (context) => TaskFormPage(user: widget.user)),
     );
     if (newTask != null) {
       setState(() {
@@ -25,13 +28,29 @@ class _TaskListPageState extends State<TaskListPage> {
     }
   }
 
-  // void _navigateToTaskDetailPage(Task task) {
+  @override
+  void initState() {
+    super.initState();
+    _createRows();
+  }
 
-  // Navigator.push(
-  //   context,
-  //   MaterialPageRoute(builder: (context) => TaskDetailPage(task: task)),
-  // );
-  // }
+  void _createRows() {
+    // Ordena as tarefas por data de abertura
+    widget.tasks.sort((a, b) => b.dataAbertura.compareTo(a.dataAbertura));
+
+    _rows = widget.tasks
+        .map((task) => DataRow(cells: [
+              DataCell(Text('${task.numero}'), onTap: () {
+                _navigateToTaskDetailPage(task);
+              }),
+              DataCell(Text(task.titulo)),
+              DataCell(Text(task.tipo)),
+              DataCell(Text(task.prioridade)),
+              DataCell(Text('${task.dataAbertura}')),
+              DataCell(Text(task.responsavel)),
+            ]))
+        .toList();
+  }
 
   void _navigateToTaskDetailPage(Task task) {
     if (task != null) {
@@ -64,11 +83,7 @@ class _TaskListPageState extends State<TaskListPage> {
     List<DataRow> rows = widget.tasks
         .map((task) => DataRow(cells: [
               DataCell(Text('${task.numero}'), onTap: () {
-                if (task != null) {
-                  _navigateToTaskDetailPage(task);
-                } else {
-                  // adicionar uma mensagem de erro ou tratamento aqui
-                }
+                _navigateToTaskDetailPage(task);
               }),
               DataCell(Text(task.titulo)),
               DataCell(Text(task.tipo)),
@@ -90,31 +105,21 @@ class _TaskListPageState extends State<TaskListPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          columns: [
-            DataColumn(label: Text('Número')),
-            DataColumn(label: Text('Título')),
-            DataColumn(label: Text('Tipo')),
-            DataColumn(label: Text('Prioridade')),
-            DataColumn(label: Text('Data')),
-            DataColumn(label: Text('Responsável')),
-          ],
-          rows: rows,
+      body: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            columns: [
+              DataColumn(label: Text('Número')),
+              DataColumn(label: Text('Título')),
+              DataColumn(label: Text('Tipo')),
+              DataColumn(label: Text('Prioridade')),
+              DataColumn(label: Text('Data')),
+              DataColumn(label: Text('Responsável')),
+            ],
+            rows: _rows,
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
       ),
     );
   }

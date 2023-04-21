@@ -4,6 +4,10 @@ import 'package:task_manager/pages/task_list_pages.dart';
 import 'package:task_manager/models/task_manager.dart';
 
 class TaskFormPage extends StatefulWidget {
+  final String user;
+
+  TaskFormPage({required this.user});
+
   @override
   _TaskFormPageState createState() => _TaskFormPageState();
 }
@@ -90,14 +94,17 @@ class _TaskFormPageState extends State<TaskFormPage> {
                       tipo: _typeValue,
                       prioridade: _priorityValue,
                       descricao: _descriptionController.text,
-                      responsavel: 'Nome do responsável',
+                      responsavel: widget.user,
                       status: 'Nova');
                   _taskManager.addTask(task);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            TaskListPage(tasks: _taskManager.getTasks())),
+                      builder: (context) => TaskListPage(
+                        tasks: _taskManager.getTasks(),
+                        user: widget.user,
+                      ),
+                    ),
                   );
                 }
               },

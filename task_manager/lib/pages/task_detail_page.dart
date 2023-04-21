@@ -99,6 +99,11 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                     'Responsável', _task.responsavel, _responsavelController),
                 _buildTableRow(
                     'Descrição', _task.descricao, _descricaoController),
+                _buildTableRow(
+                  'Status',
+                  _task.status,
+                  TextEditingController(text: _task.status),
+                ),
               ],
             ),
             SizedBox(height: 32.0),
@@ -144,7 +149,6 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: TextFormField(
               controller: controller,
-              initialValue: value,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,
